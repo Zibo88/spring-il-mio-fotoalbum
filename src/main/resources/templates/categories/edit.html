@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link th:replace="~{fragments :: css}"></link>
+<link th:replace="~{fragments :: bootstrap}"></link>
+<title>Crea una nuova pizza</title>
+
+</head>
+<body>
+	<div>
+		
+		<div class="container">
+			<div th:insert="~{fragments :: link}"></div>
+			
+			<div class="row">
+				<div class="col-12">
+				
+					<div class="create-container">
+						<h1>Modifica Categoria</h1>
+						<form id="foto-form" th:object="${categoryToEdit}" th:action="@{/categories/edit/{id}(id=${categoryToEdit.id})}" method="POST">
+						
+						<div class="mt-4">
+							<label for="nome">Titolo</label> <br>
+							<input type="text" id="nome" th:field="*{nome}" th:errorClass="is-invalid"  class="form-control">
+							<div th:if"${#fields.hasErrors('nome')}" class="invalid-feedback">
+								<div th:each="err: ${#fields.errors('nome')}" th:text="${err}"></div>
+							</div>
+						</div>
+						
+						<div class="d-flex align-items-center mt-3">
+							<input class="btn btn-success me-3" type="submit" value="invia">
+							<a class="btn btn-secondary" th:href="@{/categories}">Annulla</a>
+						</div>
+						
+						
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div th:insert="~{fragments :: bootstrapScript}"></div>
+</body>
+</html>

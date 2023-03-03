@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Le nostre pizze</title>
+<link th:replace="~{fragments :: css}">
+<link th:replace="~{fragments :: bootstrap}"></link>
+
+</head>
+<body>
+	
+	<div class="container">
+		
+		<div class="d-flex align-items-center justify-content-between">
+				<div th:insert="~{fragments :: link}"></div>
+				<div>
+		 			<form method="GET" action="/foto">
+      					<label for="keyword" >Ricerca la tua foto:</label>
+      					<input  style="border-radius: 10px;" type="text" id="keyword" name="keyword">
+      					<input class="btn btn-primary p-1" type="submit" value="Invia">
+    				</form>
+				</div>
+			</div>
+		<h1 class="verde">Le Nostre Foto</h1>
+			<div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+				<div th:each="foto : ${elencoFoto}" class="col-6">
+					
+					
+					<div class="card">
+						<h4  th:text="${foto.titolo}"> </h4>
+						<p th:if="${#strings.length(foto.descrizione) > 40}" th:text="${#strings.substring(foto.descrizione, 0 ,40) + '...'}"></p>
+						<img th:src="${foto.url}">
+						<a th:href="@{/foto/{id}(id=${foto.getId()})}" class="btn btn-primary">Maggiori info</a>
+						<a th:href="@{/foto/edit/{id}(id=${foto.getId()})}" class="btn btn-primary">Modifica foto</a>
+						<form th:action="@{/foto/delete/{id}(id=${foto.id})}" method="post">
+							<input type="submit" id="submitButton" class="btn btn-danger" value="cancella" >
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+
+	<div th:insert="~{fragments :: bootstrapScript}"></div>
+</body>
+</html>

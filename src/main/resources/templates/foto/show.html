@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Le nostre pizze</title>
+<link th:replace="~{fragments :: css}">
+<link th:replace="~{fragments :: bootstrap}"></link>
+
+</head>
+<body>
+	
+	<div class="container">
+		
+			<div class="row justify-content-center">
+				
+				<div class="col-6">
+					<h1 th:text="${foto.titolo}"></h1>
+					<div class="card">
+						<div  th:text="'Tag:' + ' ' +${foto.tag}"></div>
+						<p th:text="${foto.descrizione}"></p>
+						<img th:src="${foto.url}">
+						<div class="mt-3" >
+							Categorie:
+							<ul th:each="category : ${foto.categories}" >
+								<li style="list-style-type: circle;" th:text="${category.nome}"></li>
+							</ul>
+							
+						</div>
+					</div>
+					<a th:href="@{/foto/edit/{id}(id=${foto.getId()})}" class="btn btn-primary">Modifica foto</a>
+					<form th:action="@{/foto/delete/{id}(id=${foto.id})}" method="post">
+							<input type="submit" id="submitButton" class="btn btn-danger" value="cancella" >
+					</form>
+					<a th:href="@{/foto}" class="btn btn-secondary">Torna alla home</a>
+				</div>
+			</div>
+	</div>
+
+	<div th:insert="~{fragments :: bootstrapScript}"></div>
+</body>
+</html>

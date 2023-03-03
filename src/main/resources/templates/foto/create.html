@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link th:replace="~{fragments :: css}"></link>
+<link th:replace="~{fragments :: bootstrap}"></link>
+<title>Crea una nuova pizza</title>
+
+</head>
+<body>
+	<div>
+		
+		<div class="container">
+			<div th:insert="~{fragments :: link}"></div>
+			
+			<div class="row">
+				<div class="col-12">
+				
+					<div class="create-container">
+						<h1>Inserisci una nuova foto</h1>
+						<form id="foto-form" th:object="${foto}" th:action="@{/foto/create}" method="POST">
+						
+						<div class="mt-4">
+							<label for="titolo">Titolo</label> <br>
+							<input type="text" id="titolo" th:field="*{titolo}" th:errorClass="is-invalid"  class="form-control">
+							<div th:if"${#fields.hasErrors('titolo')}" class="invalid-feedback">
+								<div th:each="err: ${#fields.errors('titolo')}" th:text="${err}"></div>
+							</div>
+						</div>
+						
+						<div class="mt-4">
+							<label for="tag">Tag:</label> <br>
+							<input type="text" id="tag" th:field="*{tag}" th:errorClass="is-invalid"  class="form-control">
+							<div th:if"${#fields.hasErrors('tag')}" class="invalid-feedback">
+								<div th:each="err: ${#fields.errors('tag')}" th:text="${err}"></div>
+							</div> 
+						</div>
+						
+						<div class="mt-4">
+							<label for="descrizione">Descrizione</label> <br>
+							<textarea id="descrizione" th:field="*{descrizione}"  th:errorClass="is-invalid"  class="form-control"></textarea>
+							<div th:if"${#fields.hasErrors('descrizione')}" class="invalid-feedback">
+								<div th:each="err: ${#fields.errors('descrizione')}" th:text="${err}"></div>
+							</div>
+						</div>
+						
+						<div class="mt-4">
+							<label for="url">Url</label> <br>
+							<input type="text" id="url" th:field="*{url}"  th:errorClass="is-invalid"  class="form-control">
+							<div th:if"${#fields.hasErrors('url')}" class="invalid-feedback">
+								<div th:each="err: ${#fields.errors('url')}" th:text="${err}"></div>
+							</div>
+						</div>
+						
+						<div class="mt-4">
+							<label for="category">Categorie</label> <br>
+							
+							<div th:each="category : ${elencoCategorie}">
+								<input type="checkbox" th:value="${category.id}" th:field="*{categories}" th:text="${category.nome}" id="categories"> 
+							</div>
+							
+						</div>
+						
+						<div class="mt-4">
+							<select>
+								<option th:value="true" th:selected="${foto.visibile == 1}">Visibile</option>
+    							<option th:value="false" th:selected="${foto.visibile == 0}">Non Visibile</option>
+							</select>
+						</div>
+						
+						
+
+						<div class="d-flex align-items-center mt-3">
+							<input class="btn btn-success me-3" type="submit" value="invia">
+							<a class="btn btn-secondary" th:href="@{/foto}">Annulla</a>
+						</div>
+						
+						
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div th:insert="~{fragments :: bootstrapScript}"></div>
+</body>
+</html>
