@@ -18,14 +18,14 @@ public class Message {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotEmpty(message="il campo non può essere vuoto")
 	@NotNull
-	@NotEmpty(message="il campo nome non può essere vuoto")
 	private String userName;
-	
+
+	@NotEmpty(message="il campo non può essere vuoto")
 	@NotNull
-	@NotEmpty()
 	@Size( max=255, message="il messaggio deve eseere composto da massimo 255")
-	private String userMesagge;
+	private String userMessage;
 	
 	@JsonBackReference
 	@ManyToOne
@@ -47,12 +47,12 @@ public class Message {
 		this.userName = userName;
 	}
 
-	public String getUserMesagge() {
-		return userMesagge;
+	public String getUserMessage() {
+		return userMessage;
 	}
 
-	public void setUserMesagge(String userMesagge) {
-		this.userMesagge = userMesagge;
+	public void setUserMessage(String userMessage) {
+		this.userMessage = userMessage;
 	}
 
 	public Foto getFoto() {
@@ -62,6 +62,8 @@ public class Message {
 	public void setFoto(Foto foto) {
 		this.foto = foto;
 	}
+
+	
 	
 	
 	
