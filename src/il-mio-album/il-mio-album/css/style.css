@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: lightgray;
+}
+
+
+img{
+    width: 100%;
+}
+
+a{
+    text-decoration: none;
+}
+
+.card{
+    background-color: black;
+    color: white;
+}
+
+
+.single-message{
+    border: 1px solid white;
+}
