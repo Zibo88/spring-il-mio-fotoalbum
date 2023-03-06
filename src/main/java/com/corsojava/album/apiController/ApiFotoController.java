@@ -22,6 +22,7 @@ import com.corsojava.album.repository.FotoRepository;
 import com.corsojava.album.repository.MessageRepository;
 
 
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/foto")
@@ -52,6 +53,12 @@ public class ApiFotoController {
 		}
 	}
 	
+	
+	@PostMapping("/create")
+	public Foto create(@RequestBody Foto foto){
+	return fotoRepository.save(foto);
+	}
+	
 	@GetMapping("/message/{id}")
 	public ResponseEntity<Message> showMessage(@PathVariable("id") Integer id){
 		Optional<Message> message = messaggeRepository.findById(id);
@@ -62,14 +69,15 @@ public class ApiFotoController {
 		}
 	}
 	
-	@PostMapping("/message")
-	public Message create(@RequestBody Message message) {
+	@GetMapping("/message")
+	public List<Message>  index() {
 		
-		return messaggeRepository.save(message);
+		return messaggeRepository.findAll();
 	}
 	
 	
-	@PostMapping("/{id}/message")
+	
+	@PostMapping("/message/{id}")
 	public ResponseEntity<Message> create( @PathVariable("id") Integer id, @RequestBody Message message) {
 	    Optional<Foto> foto = fotoRepository.findById(id);
 	    if(foto.isPresent()) {
@@ -81,12 +89,6 @@ public class ApiFotoController {
 	    }
 	}
 	
-	
 
-	
-
-	
-	
-	
 
 }
