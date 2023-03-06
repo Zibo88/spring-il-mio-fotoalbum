@@ -21,20 +21,23 @@
     				</form>
 				</div>
 			</div>
-		<h1 class="verde">Le Nostre Foto</h1>
-			<div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+		<h1>Le Nostre Foto</h1>
+			<div class="row ">
 				<div th:each="foto : ${elencoFoto}" class="col-6">
 					
 					
-					<div class="card">
+					<div class="card my-3">
 						<h4  th:text="${foto.titolo}"> </h4>
 						<p th:if="${#strings.length(foto.descrizione) > 40}" th:text="${#strings.substring(foto.descrizione, 0 ,40) + '...'}"></p>
 						<img th:src="${foto.url}">
-						<a th:href="@{/foto/{id}(id=${foto.getId()})}" class="btn btn-primary">Maggiori info</a>
-						<a th:href="@{/foto/edit/{id}(id=${foto.getId()})}" class="btn btn-primary">Modifica foto</a>
+						<div class="d-flex justify-content-around align-items-center my-3">
+							<a th:href="@{/foto/{id}(id=${foto.getId()})}" class="btn btn-primary">Info</a>
+						<a th:href="@{/foto/edit/{id}(id=${foto.getId()})}" class="btn btn-success">Modifica</a>
 						<form th:action="@{/foto/delete/{id}(id=${foto.id})}" method="post">
-							<input type="submit" id="submitButton" class="btn btn-danger" value="cancella" >
+							<input type="submit" id="submitButton" class="btn btn-danger" value="Cancella" >
 						</form>
+						</div>
+						
 					</div>
 				</div>
 			</div>
